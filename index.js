@@ -18,12 +18,14 @@ client.on("voiceStateUpdate", (oldState, newState) => {
 
   // 退出
   if (oldState.channelId && !newState.channelId) {
-    channel.send(`${user.username} が VC を退出しました`);
+    const leftChannel = oldState.channel;
+    channel.send(`${user.username} がチャンネル「${leftChannel.name}」から退室したよ。`);
   }
 
   // 参加
   if (!oldState.channelId && newState.channelId) {
-    channel.send(`${user.username} が VC に参加しました`);
+    const joinedChannel = newState.channel;
+    channel.send(`${user.username} がチャンネル「${joinedChannel.name}」に入室したよ。`);
   }
 });
 
